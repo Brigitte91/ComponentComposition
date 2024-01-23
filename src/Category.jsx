@@ -1,21 +1,13 @@
-import { Book } from "./Book";
 
-export const Category = ({ title, books, borrowBook, returnBook }) => {
+export const Category = ({ amount, title, children }) => {
   return (
     <>
       <h3>
-        {title}: {books.length}
+        {title}: {amount}
       </h3>
-      {books.map((book) => (
-       <Book 
-       key={book.id}
-       book={book}
-       borrowBook={borrowBook}
-       returnBook={returnBook}
-       />
-      )) 
-      }
-        
+
+      {children}
+   
       
     </>
   );

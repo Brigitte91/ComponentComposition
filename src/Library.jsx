@@ -1,6 +1,8 @@
 import { collection } from "./collection";
 import { useState } from "react";
 import { Books } from "./Books";
+import { Category } from "./Category";
+import { Book } from "./Book";
 
 export default () => {
   const [books, setBooks] = useState(collection.books);
@@ -24,10 +26,28 @@ export default () => {
     setBooks(newBooks);
   };
 
+  const programmingBooks = books.filter(
+    book => book.category === "programming"
+  )
+
   return (
     <div className="App">
       <h1>Prop Drilling and Component Composition</h1>
-      <Books books={books} borrowBook={borrowBook} returnBook={returnBook} />
+      <Books amount={books.length}>
+        <Category
+        amount={programmingBooks.length}
+        title={programmingBooks.title}
+        >
+          {books.map((book) => (
+            <Book
+              key={book.id}
+              book={book}
+              borrowBook={borrowBook}
+              returnBook={returnBook}
+            />
+          ))}
+        </Category>
+      </Books>
     </div>
   );
 };
